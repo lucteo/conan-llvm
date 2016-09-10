@@ -39,4 +39,4 @@ matrix:
 install:
   - ./.travis/install.sh
 script:
-  - travis_wait 45 mvn ./.travis/run.sh
+  - travis_wait 45 ./.travis/run.sh
