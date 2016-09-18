@@ -12,6 +12,7 @@ env:
     - CONAN_TOTAL_PAGES: 1
     - CONAN_CURRENT_PAGE: 1
     - CFLAGS: "-j4"
+    - CPPFLAGS: "-j4"
 
   matrix:
     - CONAN_GCC_VERSIONS: 4.8 CONAN_USE_DOCKER=1
