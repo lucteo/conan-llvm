@@ -3,16 +3,16 @@ environment:
     PYTHON: "C:\\Python27"
     PYTHON_VERSION: "2.7.8"
     PYTHON_ARCH: "32"
-    
+
     CONAN_UPLOAD: 0
-    CONAN_REFERENCE: "llvm/3.5.2"
+    CONAN_REFERENCE: "llvm/3.9.0"
     CONAN_USERNAME: "lucteo"
     CONAN_CHANNEL: "ci"
     CONAN_TOTAL_PAGES: 4
-    
+
     matrix:
         - CONAN_CURRENT_PAGE: 1
-        - CONAN_CURRENT_PAGE: 2  
+        - CONAN_CURRENT_PAGE: 2
         - CONAN_CURRENT_PAGE: 3
         - CONAN_CURRENT_PAGE: 4
 

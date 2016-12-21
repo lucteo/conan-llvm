@@ -19,7 +19,7 @@ def inDir(directory):
 
 class LlvmConan(ConanFile):
     name = 'llvm'
-    version = '3.5.2'
+    version = '3.9.0'
     url = 'https://github.com/lucteo/conan-llvm.git'
     license = 'BSD'
     settings = 'os', 'compiler', 'build_type', 'arch'
@@ -27,8 +27,8 @@ class LlvmConan(ConanFile):
     options = {'shared': [True, False]}
     default_options = 'shared=True'
 
-    archiveName = 'llvm-3.5.2.src.tar.xz'
-    folderName = 'llvm-3.5.2.src'
+    archiveName = 'llvm-3.9.0.src.tar.xz'
+    folderName = 'llvm-3.9.0.src'
 
     def extractFromUrl(self, url):
         self.output.info('download {}'.format(url))
@@ -36,9 +36,9 @@ class LlvmConan(ConanFile):
         download(url, filename)
         self.run('tar xf %s' % filename)
         os.unlink(filename)
-        
+
     def source(self):
-        url = 'http://llvm.org/releases/3.5.2/llvm-3.5.2.src.tar.xz'
+        url = 'http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz'
         self.extractFromUrl(url)
 
     def build(self):
