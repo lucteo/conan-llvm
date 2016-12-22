@@ -37,7 +37,7 @@ class LlvmConan(ConanFile):
         if platform.system() != 'Windows':
             self.run('tar xf %s' % filename)
         else:
-            self.run('7z e %s' % filename)
+            self.run('7z x %s -so | 7z x -si -ttar' % filename)
         os.unlink(filename)
 
     def source(self):
