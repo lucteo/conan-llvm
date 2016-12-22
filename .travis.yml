@@ -38,14 +38,6 @@ matrix:
          osx_image: xcode7.3 # apple-clang 7.3
          language: generic
          env: CONAN_CURRENT_PAGE=2
-       - os: osx
-         osx_image: xcode6.4 # apple-clang 6.1
-         language: generic
-         env: CONAN_CURRENT_PAGE=1
-       - os: osx
-         osx_image: xcode6.4 # apple-clang 6.1
-         language: generic
-         env: CONAN_CURRENT_PAGE=2
 
 install:
   - ./.travis/install.sh
