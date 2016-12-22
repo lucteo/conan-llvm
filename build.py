@@ -5,7 +5,8 @@ import platform, os
 if __name__ == "__main__":
     builder = ConanMultiPackager(username='lucteo')
 
-    builder.add_common_builds()
+    visual_versions = [12, 14]
+    builder.add_common_builds(visual_versions=visual_versions)
 
     # Keep only Release builds
     filtered_builds = []
