@@ -34,7 +34,8 @@ class LlvmConan(ConanFile):
         self.output.info('download {}'.format(url))
         filename = os.path.basename(url)
         download(url, filename)
-        self.run('tar xf %s' % filename)
+        unarchiver = 'tar' if platform.system() != 'Windows' else '7z'
+        self.run('%s xf %s' % (unarchiver, filename))
         os.unlink(filename)
 
     def source(self):
