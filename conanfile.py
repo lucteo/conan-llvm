@@ -51,7 +51,7 @@ class LlvmConan(ConanFile):
             installDir = os.path.join(self.conanfile_directory, 'install')
             sharedLibs = 'ON' if self.options.shared else 'OFF'
             self.output.info('Configuring CMake...')
-            cmakeCmd = 'cmake "{srcDir}" {cmd}'
+            cmakeCmd = ('cmake "{srcDir}" {cmd}'
                      ' -Wno-dev'
                      ' -DCMAKE_BUILD_TYPE=Release'
                      ' -DCMAKE_VERBOSE_MAKEFILE=1'
@@ -68,13 +68,13 @@ class LlvmConan(ConanFile):
                      ''.format(srcDir=srcDir,
                            cmd=cmake.command_line,
                            installDir=installDir,
-                           sharedLibs=sharedLibs)
+                           sharedLibs=sharedLibs))
             self.output.info('Cmake command line: ' + cmakeCmd)
             self.run(cmakeCmd);
             self.output.info('Building...')
             extraFlags = ('-j4' if platform.system() != 'Windows' else '')
-            buildCmd = 'cmake --build . {cfg} -- {extraFlags}'
-                     ''.format(cfg=cmake.build_config, extraFlags=extraFlags)
+            buildCmd = ('cmake --build . {cfg} -- {extraFlags}'
+                     ''.format(cfg=cmake.build_config, extraFlags=extraFlags))
             self.output.info('Build command line: ' + buildCmd)
             self.run(buildCmd);
             self.output.info('Installing...')
