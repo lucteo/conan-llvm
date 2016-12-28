@@ -49,22 +49,23 @@ class LlvmConan(ConanFile):
         with inDir('build'):
             srcDir = os.path.join(self.conanfile_directory, self.folderName)
             installDir = os.path.join(self.conanfile_directory, 'install')
-            sharedLibs = 'ON' if self.options.shared else 'OFF'
+            # No shared libraries on windows
+            sharedLibs = 'ON' if self.options.shared and platform.system() != 'Windows' else 'OFF'
             self.output.info('Configuring CMake...')
             cmakeCmd = ('cmake "{srcDir}" {cmd}'
-                     ' -Wno-dev'
-                     ' -DCMAKE_BUILD_TYPE=Release'
-                     ' -DCMAKE_VERBOSE_MAKEFILE=1'
+                     # ' -Wno-dev'
+                     # ' -DCMAKE_BUILD_TYPE=Release'
+                     # ' -DCMAKE_VERBOSE_MAKEFILE=1'
                      ' -DCMAKE_INSTALL_PREFIX="{installDir}"'
-                     ' -DLLVM_INCLUDE_TOOLS=ON'
-                     ' -DLLVM_INCLUDE_TESTS=OFF'
-                     ' -DLLVM_INCLUDE_EXAMPLES=OFF'
-                     ' -DLLVM_INCLUDE_GO_TESTS=OFF'
-                     ' -DLLVM_BUILD_TOOLS=ON'
-                     ' -DLLVM_BUILD_TESTS=OFF'
-                     ' -DLLVM_TARGETS_TO_BUILD=X86'
-                     ' -DBUILD_SHARED_LIBS={sharedLibs}'
-                     ' -DLLVM_BUILD_LLVM_DYLIB={sharedLibs}'
+                     # ' -DLLVM_INCLUDE_TOOLS=ON'
+                     # ' -DLLVM_INCLUDE_TESTS=OFF'
+                     # ' -DLLVM_INCLUDE_EXAMPLES=OFF'
+                     # ' -DLLVM_INCLUDE_GO_TESTS=OFF'
+                     # ' -DLLVM_BUILD_TOOLS=ON'
+                     # ' -DLLVM_BUILD_TESTS=OFF'
+                     # ' -DLLVM_TARGETS_TO_BUILD=X86'
+                     # ' -DBUILD_SHARED_LIBS={sharedLibs}'
+                     # ' -DLLVM_BUILD_LLVM_DYLIB={sharedLibs}'
                      ''.format(srcDir=srcDir,
                            cmd=cmake.command_line,
                            installDir=installDir,
