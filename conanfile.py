@@ -19,7 +19,7 @@ def inDir(directory):
 
 class LlvmConan(ConanFile):
     name = 'llvm'
-    version = '3.9.0'
+    version = '3.9.1'
     url = 'https://github.com/lucteo/conan-llvm.git'
     license = 'BSD'
     settings = 'os', 'compiler', 'build_type', 'arch'
@@ -27,8 +27,8 @@ class LlvmConan(ConanFile):
     options = {'shared': [True, False]}
     default_options = 'shared=True'
 
-    archiveName = 'llvm-3.9.0.src.tar.xz'
-    folderName = 'llvm-3.9.0.src'
+    archiveName = 'llvm-3.9.1.src.tar.xz'
+    folderName = 'llvm-3.9.1.src'
 
     def extractFromUrl(self, url):
         self.output.info('download {}'.format(url))
@@ -41,23 +41,21 @@ class LlvmConan(ConanFile):
         os.unlink(filename)
 
     def source(self):
-        url = 'http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz'
+        url = 'http://llvm.org/releases/3.9.1/llvm-3.9.1.src.tar.xz'
         self.extractFromUrl(url)
 
     def build(self):
         cmake = CMake(self.settings)
-        self.output.info('Cmake command line: ' + cmake.command_line)
         with inDir('build'):
             srcDir = os.path.join(self.conanfile_directory, self.folderName)
             installDir = os.path.join(self.conanfile_directory, 'install')
             sharedLibs = 'ON' if self.options.shared else 'OFF'
             self.output.info('Configuring CMake...')
-            self.run('cmake "{srcDir}" {cmd}'
+            cmakeCmd = 'cmake "{srcDir}" {cmd}'
                      ' -Wno-dev'
-                     ' -DCMAKE_INSTALL_PREFIX="{installDir}"'
+                     ' -DCMAKE_BUILD_TYPE=Release'
                      ' -DCMAKE_VERBOSE_MAKEFILE=1'
-                     ' -DLIBCXX_INCLUDE_TESTS=OFF'
-                     ' -DLIBCXX_INCLUDE_DOCS=OFF'
+                     ' -DCMAKE_INSTALL_PREFIX="{installDir}"'
                      ' -DLLVM_INCLUDE_TOOLS=ON'
                      ' -DLLVM_INCLUDE_TESTS=OFF'
                      ' -DLLVM_INCLUDE_EXAMPLES=OFF'
@@ -66,14 +64,19 @@ class LlvmConan(ConanFile):
                      ' -DLLVM_BUILD_TESTS=OFF'
                      ' -DLLVM_TARGETS_TO_BUILD=X86'
                      ' -DBUILD_SHARED_LIBS={sharedLibs}'
+                     ' -DLLVM_BUILD_LLVM_DYLIB={sharedLibs}'
                      ''.format(srcDir=srcDir,
                            cmd=cmake.command_line,
                            installDir=installDir,
-                           sharedLibs=sharedLibs))
+                           sharedLibs=sharedLibs)
+            self.output.info('Cmake command line: ' + cmakeCmd)
+            self.run(cmakeCmd);
             self.output.info('Building...')
             extraFlags = ('-j4' if platform.system() != 'Windows' else '')
-            self.run('cmake --build . {cfg} -- {extraFlags}'
-                     ''.format(cfg=cmake.build_config, extraFlags=extraFlags))
+            buildCmd = 'cmake --build . {cfg} -- {extraFlags}'
+                     ''.format(cfg=cmake.build_config, extraFlags=extraFlags)
+            self.output.info('Build command line: ' + buildCmd)
+            self.run(buildCmd);
             self.output.info('Installing...')
             self.run('cmake --build . -- install')
 

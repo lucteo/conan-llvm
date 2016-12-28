@@ -6,7 +6,7 @@ services:
 env:
   global:
     - CONAN_UPLOAD: 1
-    - CONAN_REFERENCE: "llvm/3.9.0"
+    - CONAN_REFERENCE: "llvm/3.9.1"
     - CONAN_USERNAME: "lucteo"
     - CONAN_CHANNEL: "stable"
     - CONAN_TOTAL_PAGES: 2

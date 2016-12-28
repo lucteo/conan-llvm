@@ -5,7 +5,7 @@ environment:
     PYTHON_ARCH: "32"
 
     CONAN_UPLOAD: 0
-    CONAN_REFERENCE: "llvm/3.9.0"
+    CONAN_REFERENCE: "llvm/3.9.1"
     CONAN_USERNAME: "lucteo"
     CONAN_CHANNEL: "ci"
     CONAN_TOTAL_PAGES: 2

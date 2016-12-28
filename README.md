@@ -7,7 +7,7 @@
 
 Thanks for [lasote](https://github.com/lasote) for providing example on building this package.
 
-The packages generated with this **conanfile** can be found in [conan.io](https://conan.io/source/llvm/3.9.0/lucteo/stable).
+The packages generated with this **conanfile** can be found in [conan.io](https://conan.io/source/llvm/3.9.1/lucteo/stable).
 
 ## Build packages
 
@@ -16,20 +16,20 @@ The packages generated with this **conanfile** can be found in [conan.io](https:
 
 ## Upload packages to server
 
-    $ conan upload llvm/3.9.0@lucteo/stable --all
+    $ conan upload llvm/3.9.1@lucteo/stable --all
 
 ## Reuse the packages
 
 ### Basic setup
 
-    $ conan install llvm/3.9.0@lucteo/stable
+    $ conan install llvm/3.9.1@lucteo/stable
 
 ### Project setup
 
 If you handle multiple dependencies in your project is better to add a *conanfile.txt*
 
     [requires]
-    llvm/3.9.0@lucteo/stable
+    llvm/3.9.1@lucteo/stable
 
     [generators]
     txt
