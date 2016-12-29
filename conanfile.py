@@ -50,7 +50,7 @@ class LlvmConan(ConanFile):
             srcDir = os.path.join(self.conanfile_directory, self.folderName)
             installDir = os.path.join(self.conanfile_directory, 'install')
             # No shared libraries on windows
-            sharedLibs = 'ON' if self.options.shared and platform.system() != 'Windows' else 'OFF'
+            sharedLibs = 'ON' if self.options.shared else 'OFF'
             self.output.info('Configuring CMake...')
             cmakeCmd = ('cmake "{srcDir}" {cmd}'
                      ' -DCMAKE_INSTALL_PREFIX="{installDir}"'
@@ -61,8 +61,8 @@ class LlvmConan(ConanFile):
                      ' -DLLVM_BUILD_TOOLS=ON'
                      ' -DLLVM_BUILD_TESTS=OFF'
                      ' -DLLVM_TARGETS_TO_BUILD=X86'
-                     # ' -DBUILD_SHARED_LIBS={sharedLibs}'
-                     # ' -DLLVM_BUILD_LLVM_DYLIB={sharedLibs}'
+                     ' -DBUILD_SHARED_LIBS={sharedLibs}'
+                     ' -DLLVM_BUILD_LLVM_DYLIB={sharedLibs}'
                      ''.format(srcDir=srcDir,
                            cmd=cmake.command_line,
                            installDir=installDir,
@@ -76,7 +76,9 @@ class LlvmConan(ConanFile):
             self.output.info('Build command line: ' + buildCmd)
             self.run(buildCmd);
             self.output.info('Installing...')
-            self.run('cmake --build . -- install')
+            installCmd = 'cmake --build {cfg} . -- install'.format(cfg=cmake.build_config)
+            self.output.info('Install command line: ' + installCmd)
+            self.run(installCmd);
 
     def conan_info(self):
         self.info.settings.build_type = 'Release'
