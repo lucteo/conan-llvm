@@ -8,11 +8,13 @@ environment:
     CONAN_REFERENCE: "llvm/3.9.1"
     CONAN_USERNAME: "lucteo"
     CONAN_CHANNEL: "ci"
-    CONAN_TOTAL_PAGES: 2
+    CONAN_TOTAL_PAGES: 4  # (MSVC 12, 14) * (x86, x86_64)
 
     matrix:
         - CONAN_CURRENT_PAGE: 1
         - CONAN_CURRENT_PAGE: 2
+        - CONAN_CURRENT_PAGE: 3
+        - CONAN_CURRENT_PAGE: 4
 
 install:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW
