@@ -50,7 +50,7 @@ class LlvmConan(ConanFile):
             srcDir = os.path.join(self.conanfile_directory, self.folderName)
             installDir = os.path.join(self.conanfile_directory, 'install')
             # No shared libraries on windows
-            sharedLibs = 'ON' if self.options.shared else 'OFF'
+            sharedLibs = 'ON' if self.options.shared and platform.system() != 'Windows' else 'OFF'
             self.output.info('Configuring CMake...')
             cmakeCmd = ('cmake "{srcDir}" {cmd}'
                      ' -DCMAKE_INSTALL_PREFIX="{installDir}"'
