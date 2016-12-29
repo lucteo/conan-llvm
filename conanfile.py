@@ -76,7 +76,7 @@ class LlvmConan(ConanFile):
             self.output.info('Build command line: ' + buildCmd)
             self.run(buildCmd);
             self.output.info('Installing...')
-            installCmd = 'cmake --build {cfg} . -- install'.format(cfg=cmake.build_config)
+            installCmd = 'cmake --build . {cfg} -- install'.format(cfg=cmake.build_config)
             self.output.info('Install command line: ' + installCmd)
             self.run(installCmd);
 
