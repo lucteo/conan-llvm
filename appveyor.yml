@@ -4,10 +4,12 @@ environment:
     PYTHON_VERSION: "2.7.8"
     PYTHON_ARCH: "32"
 
-    CONAN_UPLOAD: 0
+    CONAN_UPLOAD: 1
     CONAN_REFERENCE: "llvm/3.9.1"
     CONAN_USERNAME: "lucteo"
-    CONAN_CHANNEL: "ci"
+    CONAN_CHANNEL: "stable"
+    CONAN_VISUAL_VERSIONS: 12,14
+    CONAN_VISUAL_VERSIONS: MD
     CONAN_TOTAL_PAGES: 4  # (MSVC 12, 14) * (x86, x86_64)
 
     matrix:
