@@ -9,7 +9,7 @@ environment:
     CONAN_USERNAME: "lucteo"
     CONAN_CHANNEL: "stable"
     CONAN_VISUAL_VERSIONS: 12,14
-    CONAN_VISUAL_VERSIONS: MD
+    CONAN_VISUAL_RUNTIMES: MD
     CONAN_TOTAL_PAGES: 4  # (MSVC 12, 14) * (x86, x86_64)
 
     matrix:
